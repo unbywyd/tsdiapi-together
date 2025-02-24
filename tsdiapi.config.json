@@ -1,0 +1,91 @@
+{
+  "name": "@tsdiapi/together",
+  "description": "A TSDIAPI plugin to extend API functionality with Together AI.",
+  "variables": [
+    {
+      "name": "TOGETHER_API_KEY",
+      "type": "string",
+      "default": "",
+      "configurable": true,
+      "description": "Your Together AI API key",
+      "validate": {
+        "type": "string",
+        "minLength": 20
+      },
+      "inquirer": {
+        "type": "input",
+        "message": "Enter your Together AI API key:"
+      }
+    },
+    {
+      "name": "TOGETHER_DEFAULT_MODEL",
+      "type": "string",
+      "default": "meta-llama/Llama-Vision-Free",
+      "configurable": true,
+      "description": "Default Together AI model to use",
+      "inquirer": {
+        "type": "input",
+        "message": "Enter the default Together AI model to use:"
+      }
+    },
+    {
+      "name": "TOGETHER_MAX_TOKENS",
+      "type": "number",
+      "default": 200,
+      "configurable": true,
+      "description": "Maximum number of tokens per response",
+      "inquirer": {
+        "type": "input",
+        "message": "Enter the max tokens for responses:"
+      }
+    },
+    {
+      "name": "TOGETHER_TEMPERATURE",
+      "type": "number",
+      "default": 0.3,
+      "configurable": true,
+      "description": "Sampling temperature for response randomness",
+      "inquirer": {
+        "type": "input",
+        "message": "Enter the temperature for response variation:"
+      }
+    },
+    {
+      "name": "TOGETHER_TOP_P",
+      "type": "number",
+      "default": 0.7,
+      "configurable": true,
+      "description": "Top-p (nucleus sampling) value",
+      "inquirer": {
+        "type": "input",
+        "message": "Enter the top-p value:"
+      }
+    },
+    {
+      "name": "TOGETHER_TOP_K",
+      "type": "number",
+      "default": 50,
+      "configurable": true,
+      "description": "Top-k sampling value",
+      "inquirer": {
+        "type": "input",
+        "message": "Enter the top-k value:"
+      }
+    },
+    {
+      "name": "TOGETHER_REPETITION_PENALTY",
+      "type": "number",
+      "default": 1.2,
+      "configurable": true,
+      "description": "Repetition penalty for controlling repeated responses",
+      "inquirer": {
+        "type": "input",
+        "message": "Enter the repetition penalty:"
+      }
+    }
+  ],
+  "postMessages": [
+    "✅ Together AI Plugin has been successfully installed!",
+    "🔹 Use `const together = getTogetherProvider();` to start using Together AI in your project."
+  ]
+}
