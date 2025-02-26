@@ -1,7 +1,7 @@
 {
   "name": "@tsdiapi/together",
   "description": "A TSDIAPI plugin to extend API functionality with together AI.",
-  "version": "0.0.1-alpha.1",
+  "version": "0.0.1-alpha.2",
   "main": "output/index.js",
   "types": "output/index.d.ts",
   "scripts": {
@@ -17,6 +17,11 @@
   "publishConfig": {
     "access": "public"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/unbywyd/tsdiapi-together"
+  },
+  "homepage": "https://github.com/unbywyd/tsdiapi-together",
   "license": "MIT",
   "files": [
     "output/",

@@ -14,6 +14,12 @@ This is a **TSDIAPI** plugin designed to integrate Together AI models into your 
 
 ## 📦 Installation
 
+Install the plugin using the **TSDIAPI CLI**:
+
+```bash
+tsdiapi plugins add together
+```
+
 You can install this plugin using npm:
 
 ```bash
