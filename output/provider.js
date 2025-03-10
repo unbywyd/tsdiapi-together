@@ -1,11 +1,5 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.TogetherProvider = void 0;
-const together_ai_1 = __importDefault(require("together-ai"));
-class TogetherProvider {
+import Together from "together-ai";
+export class TogetherProvider {
     together;
     config;
     logger;
@@ -17,7 +11,7 @@ class TogetherProvider {
         this.logger = logger;
         this.config = config;
         try {
-            this.together = new together_ai_1.default({ apiKey: config.apiKey });
+            this.together = new Together({ apiKey: config.apiKey });
             logger.info("✅ Together AI Provider initialized.");
         }
         catch (error) {
@@ -110,5 +104,4 @@ class TogetherProvider {
         }
     }
 }
-exports.TogetherProvider = TogetherProvider;
 //# sourceMappingURL=provider.js.map

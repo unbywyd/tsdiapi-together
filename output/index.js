@@ -1,11 +1,5 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.TogetherProvider = void 0;
-exports.getTogetherProvider = getTogetherProvider;
-exports.default = createPlugin;
-require("reflect-metadata");
-const provider_1 = require("./provider");
-Object.defineProperty(exports, "TogetherProvider", { enumerable: true, get: function () { return provider_1.TogetherProvider; } });
+import "reflect-metadata";
+import { TogetherProvider } from "./provider.js";
 let togetherProvider = null;
 const defaultConfig = {
     apiKey: "",
@@ -18,7 +12,7 @@ class App {
     provider;
     constructor(config) {
         this.config = { ...defaultConfig, ...config };
-        this.provider = new provider_1.TogetherProvider();
+        this.provider = new TogetherProvider();
     }
     async onInit(ctx) {
         if (togetherProvider) {
@@ -42,13 +36,14 @@ class App {
         ctx.logger.info("✅ Together AI Plugin initialized.");
     }
 }
-function getTogetherProvider() {
+export function getTogetherProvider() {
     if (!togetherProvider) {
         throw new Error("❌ Together AI Plugin is not initialized. Use createPlugin() first.");
     }
     return togetherProvider;
 }
-function createPlugin(config) {
+export { TogetherProvider };
+export default function createPlugin(config) {
     return new App(config);
 }
 //# sourceMappingURL=index.js.map
