@@ -1,7 +1,7 @@
 import "reflect-metadata";
 import type { AppContext, AppPlugin } from "@tsdiapi/server";
-import { TogetherProvider } from "./provider";
-export type { TogetherResponse } from "./provider";
+import { TogetherProvider } from "./provider.js";
+export type { TogetherResponse } from "./provider.js";
 
 let togetherProvider: TogetherProvider | null = null;
 

@@ -1,7 +1,7 @@
 import Together from "together-ai";
-import { PluginOptions } from ".";
-import { AppContext } from "@tsdiapi/server";
+import type { AppContext } from "@tsdiapi/server";
 import { CompletionCreateParamsBase } from "together-ai/resources/completions";
+import { PluginOptions } from "./index.js";
 
 export type TogetherResponse<T> = {
     result: T,
