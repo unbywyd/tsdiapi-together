@@ -12,11 +12,11 @@ export type TogetherResponse<T> = {
 export class TogetherProvider {
     public together: Together;
     private config: PluginOptions;
-    logger: AppContext["logger"];
+    logger: AppContext["fastify"]["log"];
 
     constructor() { }
 
-    init(config: PluginOptions, logger: AppContext["logger"]) {
+    init(config: PluginOptions, logger: AppContext["fastify"]["log"]) {
         if (!config.apiKey) {
             throw new Error("❌ Together AI API key is required.");
         }

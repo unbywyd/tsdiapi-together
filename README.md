@@ -99,9 +99,9 @@ After installation, you can use the Together AI provider to generate text and an
 ### **Get Together Provider**
 
 ```typescript
-import { getTogetherProvider } from "@tsdiapi/together";
+import { useTogetherProvider } from "@tsdiapi/together";
 
-const together = getTogetherProvider();
+const together = useTogetherProvider();
 ```
 
 ### **Basic Chat Completion**

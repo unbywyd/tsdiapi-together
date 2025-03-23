@@ -10,9 +10,9 @@ export type TogetherResponse<T> = {
 export declare class TogetherProvider {
     together: Together;
     private config;
-    logger: AppContext["logger"];
+    logger: AppContext["fastify"]["log"];
     constructor();
-    init(config: PluginOptions, logger: AppContext["logger"]): void;
+    init(config: PluginOptions, logger: AppContext["fastify"]["log"]): void;
     /**
      * Sends a text prompt to Together AI
      * @param prompt Text prompt

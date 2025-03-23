@@ -1,9 +1,16 @@
-import "reflect-metadata";
 import type { AppContext, AppPlugin } from "@tsdiapi/server";
 import { TogetherProvider } from "./provider.js";
 export type { TogetherResponse } from "./provider.js";
+import { FastifyInstance } from 'fastify';
 
 let togetherProvider: TogetherProvider | null = null;
+
+
+declare module "fastify" {
+    interface FastifyInstance {
+        together: TogetherProvider;
+    }
+}
 
 export type PluginOptions = {
     apiKey: string;
@@ -33,33 +40,33 @@ class App implements AppPlugin {
 
     async onInit(ctx: AppContext) {
         if (togetherProvider) {
-            ctx.logger.warn("🚨 Together AI Plugin is already initialized. Skipping re-initialization.");
+            ctx.fastify.log.warn("🚨 Together AI Plugin is already initialized. Skipping re-initialization.");
             return;
         }
 
         this.context = ctx;
-        const appConfig = ctx.config.appConfig || {};
+        const config = ctx.projectConfig;
 
-        this.config.apiKey = this.config.apiKey || appConfig["TOGETHER_API_KEY"];
-        this.config.model = this.config.model || appConfig["TOGETHER_DEFAULT_MODEL"];
-        this.config.maxTokens = this.config.maxTokens || appConfig["TOGETHER_MAX_TOKENS"];
-        this.config.temperature = this.config.temperature || appConfig["TOGETHER_TEMPERATURE"];
-        this.config.topP = this.config.topP || appConfig["TOGETHER_TOP_P"];
-        this.config.topK = this.config.topK || appConfig["TOGETHER_TOP_K"];
-        this.config.repetitionPenalty = this.config.repetitionPenalty || appConfig["TOGETHER_REPETITION_PENALTY"];
+        this.config.apiKey = config.get("TOGETHER_API_KEY", this.config.apiKey) as string;
+        this.config.model = config.get("TOGETHER_DEFAULT_MODEL", this.config.model) as string;
+        this.config.maxTokens = config.get("TOGETHER_MAX_TOKENS", this.config.maxTokens) as number;
+        this.config.temperature = config.get("TOGETHER_TEMPERATURE", this.config.temperature) as number;
+        this.config.topP = config.get("TOGETHER_TOP_P", this.config.topP) as number;
+        this.config.topK = config.get("TOGETHER_TOP_K", this.config.topK) as number;
+        this.config.repetitionPenalty = config.get("TOGETHER_REPETITION_PENALTY", this.config.repetitionPenalty) as number;
 
         if (!this.config.apiKey) {
             throw new Error("❌ Together AI Plugin is missing an API key.");
         }
 
-        this.provider.init(this.config, ctx.logger);
+        this.provider.init(this.config, ctx.fastify.log);
         togetherProvider = this.provider;
 
-        ctx.logger.info("✅ Together AI Plugin initialized.");
+        ctx.fastify.decorate("together", this.provider);
     }
 }
 
-export function getTogetherProvider(): TogetherProvider {
+export function useTogetherProvider(): TogetherProvider {
     if (!togetherProvider) {
         throw new Error("❌ Together AI Plugin is not initialized. Use createPlugin() first.");
     }

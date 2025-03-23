@@ -1,7 +1,11 @@
-import "reflect-metadata";
 import type { AppContext, AppPlugin } from "@tsdiapi/server";
 import { TogetherProvider } from "./provider.js";
 export type { TogetherResponse } from "./provider.js";
+declare module "fastify" {
+    interface FastifyInstance {
+        together: TogetherProvider;
+    }
+}
 export type PluginOptions = {
     apiKey: string;
     model: string;
@@ -19,7 +23,7 @@ declare class App implements AppPlugin {
     constructor(config?: PluginOptions);
     onInit(ctx: AppContext): Promise<void>;
 }
-export declare function getTogetherProvider(): TogetherProvider;
+export declare function useTogetherProvider(): TogetherProvider;
 export { TogetherProvider };
 export default function createPlugin(config?: PluginOptions): App;
 //# sourceMappingURL=index.d.ts.map
